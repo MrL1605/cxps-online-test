@@ -33,6 +33,7 @@ module.exports.SubmitModal = class QuestionModal {
         this.candidateName = "";
         this.candidateEmailAdd = "";
         this.candidateExp = -1;
+        this.testName = "";
         this.answers = [];
     }
 };

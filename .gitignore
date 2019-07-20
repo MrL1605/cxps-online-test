@@ -77,5 +77,4 @@ typings/
 .idea/
 package-lock.json
 nohup.out
-src/submission_dir/
-ui/assets/
+submission_dir/

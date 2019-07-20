@@ -3,8 +3,8 @@ const fs = require("fs");
 const path = require("path");
 const {QuestionModal} = require("./modals");
 
-module.exports.QUES_DIRNAME = "questions_dir";
-module.exports.SUBS_DIRNAME = "submission_dir";
+module.exports.QUES_DIRNAME = "../questions_dir";
+module.exports.SUBS_DIRNAME = "../submission_dir";
 
 module.exports.getAllTests = (dir) => {
     let questionnaire = {tests: []};
