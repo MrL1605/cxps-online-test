@@ -16,6 +16,15 @@ app.use(serve);
 app.all("/hello", (req, res) => {
     res.send("Reached over here");
 });
+
+// Add listener to get questions as response
+app
+    .get("/api/questions", require("./services/questions").getTests)
+    .get("/api/questions/:test_name", require("./services/questions").getTestQuestions)
+    .post("/api/submit/:test_name", require("./services/submit").submitTest)
+;
+
+
 app.start(3000).then(() => {
     console.log("Static Server is started on port [3000]");
 });
