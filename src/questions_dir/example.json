@@ -1,0 +1,23 @@
+[
+    {
+        "question": "What is correct in here?",
+        "options": [
+            "ABC",
+            "PQR",
+            "RST",
+            "THE"
+        ],
+        "answer": 3
+    },
+    {
+        "question": "What is correct in here according to code?",
+        "code": "\"{asd\"",
+        "options": [
+            "No where",
+            "Over there",
+            "Over here",
+            "Some where"
+        ],
+        "answer": 2
+    }
+]
