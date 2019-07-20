@@ -1,0 +1,11 @@
+version: "3.5"
+
+services:
+  cxps-online-test:
+    image: "redit/cxps-online-test:0.3"
+    ports:
+      - 4343:3000
+    build:
+      context: .
+
+
