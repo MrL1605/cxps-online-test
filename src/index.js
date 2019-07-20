@@ -1,40 +1,22 @@
-/*
-const https = require("https");
 const bodyParser = require("body-parser");
-
-*/
-/*
-const service = require('restana')({
-    server: https.createServer({
-        "ignoreTrailingSlash": false
-    })
-});
-
-service.use(bodyParser.json());
-
-service.all("/", (req, res) => {
-    res.send("Reached over here");
-});
-*/
-
-
-// service.start(3000);
-// .then(() => {
-//     console.log("Server is started on port [3000]");
-// })
-
-
 const files = require("serve-static");
 const path = require("path");
-console.log(__dirname);
 const serve = files(path.join(__dirname, '../ui'));
 
 const app = require("restana")({
-    disableResponseEvent: true
+    disableResponseEvent: true,
+    errorHandler: (err, req, res) => {
+        console.error("Error Occurred", err);
+        res.send(err);
+    }
 });
 
+app.use(bodyParser.json());
 app.use(serve);
-app.start(3000, () => {
+app.all("/hello", (req, res) => {
+    res.send("Reached over here");
+});
+app.start(3000).then(() => {
     console.log("Static Server is started on port [3000]");
 });
 
