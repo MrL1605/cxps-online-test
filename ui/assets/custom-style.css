@@ -1,0 +1,20 @@
+.component-title {
+    margin-top: 30px;
+    margin-bottom: 60px;
+    margin-left: 32px;
+}
+
+.tests-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+
+.tests-card-square.mdl-card {
+    width: 512px;
+}
+
+.tests-card-square > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+    text-transform: capitalize;
+    background: url("../assets/images/welcome.jpg") center / cover #46B6AC;
+}
