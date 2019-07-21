@@ -21,5 +21,9 @@
         ],
         "type": "multi",
         "answer": 2
+    },
+    {
+        "question": "Can you do some coding? Let's see.",
+        "type": "text"
     }
 ]

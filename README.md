@@ -47,4 +47,5 @@ docker-compose -f compose.yml up -d
  - Evaluate the answers
  - Create a Page to view evaluation.
  - Store test in local storage until submitted, to prevent test loss.
+ - Maybe move from checkbox to collection lists .
  

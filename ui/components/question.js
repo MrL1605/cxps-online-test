@@ -1,20 +1,27 @@
 import {helper} from "../helper.js";
 
-export const QuestionComponent = (function () {
-    let id, ques, ques_ind, update, self;
+export const QuestionComponent = (function (_id, _ques, _ind) {
+    let id, ques, ques_ind, currentAnswer, self;
 
-    const optionsContent = () => {
-        // If no options are found return empty string to make sure nothing is rendered.
-        if (!ques["options"] || ques["options"].length === 0)
-            return "";
+    const answerContent = () => {
+
+        const wrapAround = (opts) => `<div class="test-question-options"><ul>${opts}</ul></div>`;
 
         switch (ques["type"]) {
             case "option":
+                // If no options are found return empty string to make sure nothing is rendered.
+                if (!ques["options"] || ques["options"].length === 0)
+                    return "";
                 // Option is default as well. So pass through switch case for now
                 break;
             case "multi":
+                // If no options are found return empty string to make sure nothing is rendered.
+                if (!ques["options"] || ques["options"].length === 0)
+                    return "";
+
+
                 // Case for multiple choice questions
-                return ques["options"]
+                return wrapAround(ques["options"]
                     .map((o, o_ind) => `
                         <li>
                             <label class="test-option-checkbox" for="${ques_ind}-${o_ind}-checkbox-option">
@@ -24,12 +31,19 @@ export const QuestionComponent = (function () {
                             </label>                        
                         </li>
                         `)
-                    .join("\n");
+                    .join("\n"));
+            case "text":
+                return `
+                    <div class="input-field col s12">
+                        <textarea id="${ques_ind}-text-area" class="materialize-textarea"></textarea>
+                        <label for="${ques_ind}-text-area">Solution</label>
+                    </div>
+                `;
             default:
                 // Option is default as well. So pass through switch case for now
                 break;
         }
-        return ques["options"]
+        return wrapAround(ques["options"]
             .map((o, o_ind) => `
                 <li>
                     <label class="test-option-radio" for="${ques_ind}-${o_ind}-radio-option">
@@ -38,19 +52,52 @@ export const QuestionComponent = (function () {
                     </label>
                 </li>
                 `)
-            .join("\n");
+            .join("\n"));
     };
 
     const registerListeners = () => {
-
+        switch (ques["type"]) {
+            default:
+            case "option":
+                // No need to update currentAnswer
+                currentAnswer = -1;
+                ques["options"].forEach((o, o_ind) => {
+                    document
+                        .getElementById(`${ques_ind}-${o_ind}-radio-option`)
+                        .addEventListener("click", () => helper.updateAnswer(ques_ind, o_ind));
+                });
+                break;
+            case "multi":
+                // Store the current selection in currentAnswer
+                currentAnswer = [];
+                ques["options"].forEach((o, o_ind) => {
+                    let optionEle = document
+                        .getElementById(`${ques_ind}-${o_ind}-checkbox-option`);
+                    optionEle
+                        .addEventListener("click", () => {
+                            if (optionEle.checked)
+                                helper.addIfNotExists(currentAnswer, o_ind);
+                            else
+                                helper.removeIfExists(currentAnswer, o_ind);
+                            helper.updateAnswer(ques_ind, currentAnswer);
+                        });
+                });
+                break;
+            case "text":
+                // No need to update currentAnswer
+                currentAnswer = "";
+                let txtEle = document.getElementById(`${ques_ind}-text-area`);
+                txtEle.addEventListener("focus", () => helper.updateAnswer(ques_ind, txtEle.value));
+                txtEle.addEventListener("blur", () => helper.updateAnswer(ques_ind, txtEle.value));
+                break;
+        }
     };
 
     self = {
-        init(_id, _ques, _ind, clb) {
+        init(_id, _ques, _ind) {
             id = _id;
             ques = _ques;
             ques_ind = _ind;
-            update = clb;
             self.render();
             registerListeners();
             return self;
@@ -59,23 +106,24 @@ export const QuestionComponent = (function () {
 
             let codeBlockContent = "", imageContent = "";
             if (ques["code"])
-                codeBlockContent = `<pre><code class="language-java">${ques["code"].trim()}</code></pre>`;
+                codeBlockContent = `<div class="question-code-block"><pre><code class="language-java">${ques["code"].trim()}</code></pre></div>`;
 
             if (ques["image"])
                 imageContent = `<img src="assets/ext-images/${ques["image"]}" alt="question-related-image"/>`;
 
+
             let ele = helper.replaceInnerHTML(id, `
-                <h4>${ques_ind + 1}: ${ques["question"]}</h4>
-                <ul class="test-question-options">
+                <div class="col s12">
+                    <h4>${ques_ind + 1}: ${ques["question"]}</h4>
                     ${codeBlockContent}
                     ${imageContent}
-                    ${optionsContent(ques, ques_ind)}
-                </ul>
+                    ${answerContent(ques, ques_ind)}                
+                </div>
             `);
 
-            Prism.highlightAllUnder(ele, true);
+            Prism.highlightAllUnder(ele, false);
         }
     };
-    return self;
-})();
+    return self.init(_id, _ques, _ind);
+});
 

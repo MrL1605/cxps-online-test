@@ -9,7 +9,10 @@ export const AppModule = (function () {
     let self = {
         render() {
 
-            console.log("Rendering Page");
+            console.log("Rendering Root Page");
+            const rerender = () => self.render();
+
+            // First render a base empty structure
             helper.replaceInnerHTML("page-root", `
                 <div>
                     ${HeaderComponent.render()}
@@ -23,7 +26,7 @@ export const AppModule = (function () {
                     </div>
                 </div>`);
 
-            const rerender = () => self.render();
+            // Then populate the empty structure with with child components/pages.
             switch (STORE.page) {
                 case PAGES.LIST_TESTS:
                     ListTestsPage

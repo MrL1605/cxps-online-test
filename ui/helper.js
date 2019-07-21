@@ -1,3 +1,5 @@
+import {STORE} from "./services/store.js";
+
 export const helper = (function () {
     return {
         tName(_str) {
@@ -12,6 +14,18 @@ export const helper = (function () {
             idEle.innerHTML = _content;
             // componentHandler.upgradeElement(idEle);
             return idEle;
+        },
+        updateAnswer(q_ind, answer) {
+            STORE.selectedAnswers[q_ind] = answer;
+        },
+        addIfNotExists(_arr, _ele) {
+            if (_arr.indexOf(_ele) === -1)
+                _arr.push(_ele);
+        },
+        removeIfExists(_arr, _ele) {
+            let _ind = _arr.indexOf(_ele);
+            if (_ind !== -1)
+                _arr.splice(_ele, 1);
         }
     };
 })();

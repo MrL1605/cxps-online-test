@@ -6,5 +6,6 @@ export const PAGES = {
 
 export var STORE = {
     page: PAGES.LIST_TESTS,
-    testName: ""
+    testName: "",
+    selectedAnswers: []
 };

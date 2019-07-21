@@ -2,17 +2,35 @@ import {services} from "../services/questions.js";
 import {ErrorAlertComponent} from "../components/alert.js";
 import {QuestionComponent} from "../components/question.js";
 import {helper} from "../helper.js";
-import {STORE, PAGES} from "../services/store.js";
+import {PAGES, STORE} from "../services/store.js";
 
 export const TestPage = (function () {
-    let id, questions = [], selectedAnswers = [], errorMsg = "", parentClb, self;
+    let id, questions = [], errorMsg = "", parentClb, self;
+
+    const getValFromId = (_i) => document.getElementById(_i).value;
 
     const registerListeners = () => {
         document.getElementById("submit-test")
             .addEventListener("click", () => {
-                // services.submitTestAnswers()
-                STORE.page = PAGES.TEST_COMPLETE;
-                parentClb();
+                let submission = {
+                    candidateName: getValFromId("first_name") + " " + getValFromId("last_name"),
+                    candidateEmailAdd: getValFromId("email"),
+                    candidateExp: getValFromId("experience"),
+                    testName: STORE.testName,
+                    answers: JSON.parse(JSON.stringify(STORE.selectedAnswers)),
+                };
+                services.submitTestAnswers(submission, () => {
+                    STORE.page = PAGES.TEST_COMPLETE;
+                    STORE.testName = "";
+                    STORE.selectedAnswers = [];
+                    console.log("Completed test");
+                    parentClb();
+                }, (err) => {
+                    console.error("ERROR Occurred", err);
+                    errorMsg = err + "<br>You might want to refresh the window";
+                    self.render();
+                    registerListeners();
+                });
             });
     };
 
@@ -24,7 +42,8 @@ export const TestPage = (function () {
             services.getTestQuestions(STORE.testName, (ques) => {
                 questions = ques;
                 // Set a default answer by default
-                ques.forEach(() => selectedAnswers.push(-1));
+                STORE.selectedAnswers = [];
+                ques.forEach(() => STORE.selectedAnswers.push(-1));
                 self.render();
                 registerListeners();
             }, (err) => {
@@ -37,7 +56,7 @@ export const TestPage = (function () {
         render() {
 
             let questionContent = questions
-                .map((_, indQ) => `<div id="${indQ}-question"></div>`)
+                .map((_, indQ) => `<div id="${indQ}-question" class="row"></div>`)
                 .join("\n");
 
             helper.replaceInnerHTML(id, `
@@ -96,8 +115,7 @@ export const TestPage = (function () {
             `);
 
             questions.forEach((eachQ, indQ) => {
-                return QuestionComponent
-                    .init(`${indQ}-question`, eachQ, indQ);
+                return QuestionComponent(`${indQ}-question`, eachQ, indQ);
             });
 
             if (errorMsg)

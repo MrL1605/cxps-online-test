@@ -42,7 +42,7 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 }
 
 .test-question-options {
-    margin: 0;
+    margin: 25px 0;
     padding: 0;
     list-style: none;
 }
@@ -50,4 +50,8 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 .test-option-checkbox, .test-option-radio {
     min-width: 100%;
     display: inline-block;
+}
+
+.question-code-block {
+    margin: 25px 0;
 }
