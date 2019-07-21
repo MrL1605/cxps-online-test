@@ -1,29 +1,47 @@
 import {HeaderComponent} from "./components/header.js";
-import {ListTests} from "./pages/list-tests.js";
+import {ListTestsPage} from "./pages/list-tests.js";
+import {PAGES, STORE} from "./services/store.js";
+import {TestCompletePage} from "./pages/test-complete.js";
+import {TestPage} from "./pages/test.js";
+import {helper} from "./helper.js";
 
 export const AppModule = (function () {
-    return {
+    let self = {
         render() {
 
-            console.log("Rendering again");
-            document.getElementById("page-root").innerHTML = `
-                <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            console.log("Rendering Page");
+            helper.replaceInnerHTML("page-root", `
+                <div>
                     ${HeaderComponent.render()}
-                    <main class="mdl-layout__content">
-                        <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--3-col"></div>
-                            <div class="mdl-cell mdl-cell--6-col" id="page-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s2"></div>
+                            <div class="col s8" id="page-content">
                             </div>
-                            <div class="mdl-cell mdl-cell--3-col"></div>
+                            <div class="col s2"></div>
                         </div>
-                    </main>
-                </div>`;
+                    </div>
+                </div>`);
 
-            ListTests
-                .init("page-content");
+            const rerender = () => self.render();
+            switch (STORE.page) {
+                case PAGES.LIST_TESTS:
+                    ListTestsPage
+                        .init("page-content", rerender);
+                    break;
+                case PAGES.TEST:
+                    TestPage
+                        .init("page-content", rerender);
+                    break;
+                case PAGES.TEST_COMPLETE:
+                    TestCompletePage
+                        .init("page-content", rerender);
+                    break;
+            }
 
         }
-    }
+    };
+    return self;
 })();
 
 AppModule.render();

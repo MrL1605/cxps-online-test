@@ -11,15 +11,14 @@
     },
     {
         "question": "What is correct in here according to code?",
-        "code": "public static void main() {\n    System.out.println(\"asd\");\n}",
-        "lang": "java",
+        "code": "let a = \"Overthere\";\n let b = () => {\n    console.log(\"You need to stop the QTip when there's resistance\");\n}",
+        "lang": "javascript",
         "options": [
             "No where",
             "Over there",
             "Over here",
             "Some where"
         ],
-        "type": "multi",
         "answer": 2
     }
 ]

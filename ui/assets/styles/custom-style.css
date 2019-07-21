@@ -1,0 +1,53 @@
+body, h1, h2, h3, h4, h5, h6, p, span {
+    font-family: "Ubuntu", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.component-title {
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+.tests-card-square.card {
+    width: 512px;
+    margin: 25px auto;
+}
+
+.card-title {
+    text-shadow: 2px 2px #111;
+}
+
+.tests-card-square > .card-image {
+    color: #fff;
+    height: 176px;
+    text-transform: capitalize;
+    background: url('../images/welcome.jpg') center / cover;
+}
+
+.test-complete-card-square.card {
+    width: 320px;
+    height: 320px;
+}
+
+.test-complete-card-square.card > .card-image {
+    color: #fff;
+    height: 176px;
+    text-transform: capitalize;
+    background: url("../images/dog.png") bottom right 15% no-repeat #46B6AC;
+}
+
+.test-question-list {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.test-question-options {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.test-option-checkbox, .test-option-radio {
+    min-width: 100%;
+    display: inline-block;
+}

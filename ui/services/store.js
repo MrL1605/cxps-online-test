@@ -1,6 +1,7 @@
 export const PAGES = {
     LIST_TESTS: "LIST",
-    QUESTION: "QUESTION"
+    TEST: "TEST",
+    TEST_COMPLETE: "COMPLETE"
 };
 
 export var STORE = {

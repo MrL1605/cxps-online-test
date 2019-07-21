@@ -3,6 +3,7 @@ module.exports.QuestionModal = class QuestionModal {
         this.question = "";
         this.type = "";
         this.code = "";
+        this.lang = "";
         this.image = "";
         this.options = [];
         this.answer = -1;
@@ -14,6 +15,7 @@ module.exports.UIQuestionModal = class UIQuestionModal {
         this.question = "";
         this.type = "";
         this.code = "";
+        this.lang = "";
         this.image = "";
         this.options = [];
     }
@@ -22,6 +24,7 @@ module.exports.UIQuestionModal = class UIQuestionModal {
         this.question = ques.question;
         this.type = ques.type;
         this.code = ques.code;
+        this.lang = "";
         this.image = ques.image;
         this.options = ques.options;
         return this;

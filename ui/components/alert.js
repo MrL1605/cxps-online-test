@@ -1,4 +1,6 @@
-export const errorAlert = (function () {
+import {helper} from "../helper.js";
+
+export const ErrorAlertComponent = (function () {
 
     let id, content, dialog, parentClb, self;
 
@@ -29,17 +31,17 @@ export const errorAlert = (function () {
             parentClb("closed");
         },
         render: () => {
-            document.getElementById(id).innerHTML = `
-            <dialog class="mdl-dialog" id="${id}-dialog">
-                <h3 class="mdl-dialog__title">Error Occurred</h3>
-                <div class="mdl-dialog__content">
-                    <p>${content}</p>
-                </div>
-                <div class="mdl-dialog__actions">
-                    <button class="mdl-button" id="${id}-dialog-close-btn" type="button">Close</button>
-                </div>
-            </dialog>
-            `;
+            helper.replaceInnerHTML(id, `
+                <dialog class="mdl-dialog" id="${id}-dialog">
+                    <h3 class="mdl-dialog__title">Error Occurred</h3>
+                    <div class="mdl-dialog__content">
+                        <p>${content}</p>
+                    </div>
+                    <div class="mdl-dialog__actions">
+                        <button class="mdl-button" id="${id}-dialog-close-btn" type="button">Close</button>
+                    </div>
+                </dialog>
+                `);
         }
     };
     return self;
