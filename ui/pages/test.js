@@ -7,30 +7,41 @@ import {PAGES, STORE} from "../services/store.js";
 export const TestPage = (function () {
     let id, questions = [], errorMsg = "", parentClb, self;
 
-    const getValFromId = (_i) => document.getElementById(_i).value;
+    const getValFromId = (_i) => {
+        let _ele = document.getElementById(_i);
+        if (_ele.classList.contains("invalid") || !_ele.value) {
+            _ele.focus();
+            throw new Error(`Invalid content in input[${_i}]`);
+        }
+        return _ele.value;
+    };
 
     const registerListeners = () => {
         document.getElementById("submit-test")
             .addEventListener("click", () => {
-                let submission = {
-                    candidateName: getValFromId("first_name") + " " + getValFromId("last_name"),
-                    candidateEmailAdd: getValFromId("email"),
-                    candidateExp: getValFromId("experience"),
-                    testName: STORE.testName,
-                    answers: JSON.parse(JSON.stringify(STORE.selectedAnswers)),
-                };
-                services.submitTestAnswers(submission, () => {
-                    STORE.page = PAGES.TEST_COMPLETE;
-                    STORE.testName = "";
-                    STORE.selectedAnswers = [];
-                    console.log("Completed test");
-                    parentClb();
-                }, (err) => {
-                    console.error("ERROR Occurred", err);
-                    errorMsg = err + "<br>You might want to refresh the window";
-                    self.render();
-                    registerListeners();
-                });
+                try {
+                    let submission = {
+                        candidateName: getValFromId("first_name") + " " + getValFromId("last_name"),
+                        candidateEmailAdd: getValFromId("email"),
+                        candidateExp: getValFromId("experience"),
+                        testName: STORE.testName,
+                        answers: JSON.parse(JSON.stringify(STORE.selectedAnswers)),
+                    };
+                    services.submitTestAnswers(submission, () => {
+                        STORE.page = PAGES.TEST_COMPLETE;
+                        STORE.testName = "";
+                        STORE.selectedAnswers = [];
+                        console.log("Completed test");
+                        parentClb();
+                    }, (err) => {
+                        console.error("ERROR Occurred", err);
+                        errorMsg = err + "<br>You might want to refresh the window";
+                        self.render();
+                        registerListeners();
+                    });
+                } catch (e) {
+
+                }
             });
     };
 
@@ -78,11 +89,11 @@ export const TestPage = (function () {
                         <form class="col s12">
                             <div class="row">
                                 <div class="input-field col s6">
-                                    <input class="validate" id="first_name" type="text">
+                                    <input class="validate" id="first_name" type="text" minlength="1">
                                     <label for="first_name">First Name</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input class="validate" id="last_name" type="text">
+                                    <input class="validate" id="last_name" type="text" minlength="1">
                                     <label for="last_name">Last Name</label>
                                 </div>
                             </div>

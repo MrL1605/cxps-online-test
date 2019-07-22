@@ -2,13 +2,17 @@ version: "3.5"
 
 services:
   cxps-online-test:
-    image: "redit/cxps-online-test:0.3"
+    image: "redit/cxps-online-test:1.5"
     ports:
       - 4343:3000
     volumes:
       - "qdir:/cxps/questions_dir"
       - "sdir:/cxps/submission_dir"
+      - "${PWD}/ext_images:/cxps/ui/assets/ext-images"
     build:
       context: .
 
+volumes:
+  qdir:
+  sdir:
 
