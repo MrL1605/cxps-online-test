@@ -45,7 +45,7 @@ export const services = (() => {
                 });
         },
         evaluate: (name, clb, errClb) => {
-            fetch(`${baseURL}/eval`,
+            fetch(`${baseURL}/eval/${name}`,
                 {method: 'get', headers: {"Auth-Token": STORE.privateKey}})
                 .then(response => response.json())
                 .then(jsonData => clb(jsonData))

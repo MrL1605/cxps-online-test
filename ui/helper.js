@@ -26,6 +26,12 @@ export const helper = (function () {
             let _ind = _arr.indexOf(_ele);
             if (_ind !== -1)
                 _arr.splice(_ele, 1);
+        },
+        getSubFormattedDate(sub) {
+            return new Date(parseInt(sub.split("-")[1])).toLocaleString();
+        },
+        getSubName(sub) {
+            return sub.split("-")[0];
         }
     };
 })();

@@ -1,9 +1,10 @@
 import {ListTestsPage} from "./pages/list-tests.js";
+import {TestPage} from "./pages/test.js";
 import {TestCompletePage} from "./pages/test-complete.js";
 import {ListSubmissionsPage} from "./pages/list-submissions.js";
+import {EvaluatePage} from "./pages/evaluate.js";
 import {HeaderComponent} from "./components/header.js";
 import {PAGES, STORE} from "./services/store.js";
-import {TestPage} from "./pages/test.js";
 import {helper} from "./helper.js";
 
 export const AppModule = (function () {
@@ -12,9 +13,11 @@ export const AppModule = (function () {
 
             console.log("Rendering Root Page");
             if (typeof isAdmin !== "undefined" && isAdmin) {
-                STORE.privateKey = btoa(prompt("Enter the private key", ""));
-                STORE.page = PAGES.LIST_SUBMISSIONS;
-                console.log("That would be admin page.");
+                if (!STORE.privateKey) {
+                    STORE.privateKey = btoa(prompt("Enter the private key", ""));
+                    STORE.page = PAGES.LIST_SUBMISSIONS;
+                    console.log("That would be admin page.");
+                }
             }
 
             const rerender = () => self.render();
@@ -50,9 +53,11 @@ export const AppModule = (function () {
                 case PAGES.LIST_SUBMISSIONS:
                     ListSubmissionsPage
                         .init("page-content", rerender);
+                    break;
                 case PAGES.SUBMISSION:
-                    ListSubmissionsPage
+                    EvaluatePage
                         .init("page-content", rerender);
+                    break;
             }
 
         }

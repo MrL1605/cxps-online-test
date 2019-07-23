@@ -53,6 +53,7 @@ export const TestPage = (function () {
                 questions = ques;
                 // Set a default answer by default
                 STORE.selectedAnswers = [];
+                // TODO: Fix this, not all answers default to -1, need to handle [], ""
                 ques.forEach(() => STORE.selectedAnswers.push(-1));
                 self.render();
                 registerListeners();
@@ -71,8 +72,8 @@ export const TestPage = (function () {
 
             helper.replaceInnerHTML(id, `
                 
-                <div class="mdl-cell mdl-cell--12-col">
-                    <h3 class="mdl-typography--text-capitalize">
+                <div class="">
+                    <h3 class="">
                         ${helper.tName(STORE.testName)}
                     </h3>
                     <p>
@@ -100,7 +101,7 @@ export const TestPage = (function () {
                                 <div class="input-field col s12">
                                     <input class="validate" id="experience" type="number" 
                                         value="1.0" min="1.0" step="any">
-                                    <label for="experience" class="active">Experience</label>
+                                    <label for="experience" class="active">Work Experience</label>
                                 </div>
                             </div>
                             <div class="row">

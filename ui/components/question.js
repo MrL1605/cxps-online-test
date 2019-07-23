@@ -1,4 +1,5 @@
 import {helper} from "../helper.js";
+import {STORE} from "../services/store.js";
 
 export const QuestionComponent = (function (_id, _ques, _ind) {
     let id, ques, ques_ind, currentAnswer, self;
@@ -6,6 +7,19 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
     const answerContent = () => {
 
         const wrapAround = (opts) => `<div class="test-question-options"><ul>${opts}</ul></div>`;
+        const getSelectedTxtAnswer = () => {
+            if (STORE.selectedAnswers[ques_ind] !== -1)
+                return STORE.selectedAnswers[ques_ind];
+            else return "";
+        };
+        const getSelectedCheckedAnswer = (opt_ind) => {
+            if (STORE.selectedAnswers[ques_ind] !== -1)
+                return STORE.selectedAnswers[ques_ind].indexOf(opt_ind) !== -1 ? "checked" : "";
+        };
+        const getSelectedOptionAnswer = (opt_ind) => {
+            if (STORE.selectedAnswers[ques_ind] !== -1)
+                return STORE.selectedAnswers[ques_ind] === opt_ind ? "checked" : "";
+        };
 
         switch (ques["type"]) {
             case "option":
@@ -19,13 +33,12 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
                 if (!ques["options"] || ques["options"].length === 0)
                     return "";
 
-
                 // Case for multiple choice questions
                 return wrapAround(ques["options"]
                     .map((o, o_ind) => `
                         <li>
                             <label class="test-option-checkbox" for="${ques_ind}-${o_ind}-checkbox-option">
-                                <input type="checkbox" class="filled-in"
+                                <input type="checkbox" class="filled-in" ${getSelectedCheckedAnswer(o_ind)}
                                     id="${ques_ind}-${o_ind}-checkbox-option" name="${ques_ind}-checkbox-option">
                                 <span>${o}</span>
                             </label>                        
@@ -35,7 +48,8 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
             case "text":
                 return `
                     <div class="input-field col s12">
-                        <textarea id="${ques_ind}-text-area" class="materialize-textarea"></textarea>
+                        <textarea id="${ques_ind}-text-area" 
+                            class="materialize-textarea">${getSelectedTxtAnswer()}</textarea>
                         <label for="${ques_ind}-text-area">Solution</label>
                     </div>
                 `;
@@ -47,7 +61,8 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
             .map((o, o_ind) => `
                 <li>
                     <label class="test-option-radio" for="${ques_ind}-${o_ind}-radio-option">
-                        <input type="radio" id="${ques_ind}-${o_ind}-radio-option" name="${ques_ind}-radio-option">
+                        <input type="radio" ${getSelectedOptionAnswer(o_ind)}
+                                id="${ques_ind}-${o_ind}-radio-option" name="${ques_ind}-radio-option">
                         <span>${o}</span>
                     </label>
                 </li>
@@ -122,6 +137,7 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
             `);
 
             Prism.highlightAllUnder(ele, false);
+            M.updateTextFields();
         }
     };
     return self.init(_id, _ques, _ind);
