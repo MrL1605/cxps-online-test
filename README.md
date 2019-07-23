@@ -30,6 +30,9 @@ docker-compose -f compose.yml up -d
  - `image` tag only takes name of the file that exists in ext-images **optional**
  - `code` takes the string that needs to be represented as code block on UI. **optional**
  - `lang` related to the language `code` is written in. Used for highlighting code.
+ - `answer` is an integer if type of question is single option answer, 
+    array if type is of multiple choice.
+ - Note: `answer` needs 0 index based.
 
 ## Notes
  - Currently supported languages in code blocks
