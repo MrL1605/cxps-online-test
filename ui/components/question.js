@@ -8,30 +8,30 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
 
         const wrapAround = (opts) => `<div class="test-question-options"><ul>${opts}</ul></div>`;
         const getSelectedTxtAnswer = () => {
-            if (STORE.selectedAnswers[ques_ind] !== -1)
+            if (STORE.selectedAnswers[ques_ind] && STORE.selectedAnswers[ques_ind] !== -1)
                 return STORE.selectedAnswers[ques_ind];
             else return "";
         };
         const getSelectedCheckedAnswer = (opt_ind) => {
-            if (STORE.selectedAnswers[ques_ind] !== -1 &&
+            if (STORE.selectedAnswers[ques_ind] && STORE.selectedAnswers[ques_ind] !== -1 &&
                 STORE.selectedAnswers[ques_ind].indexOf(opt_ind) !== -1)
                 return "checked";
             return "";
         };
         const getSelectedOptionAnswer = (opt_ind) => {
-            if (STORE.selectedAnswers[ques_ind] !== -1 &&
+            if (STORE.selectedAnswers[ques_ind] && STORE.selectedAnswers[ques_ind] !== -1 &&
                 STORE.selectedAnswers[ques_ind] === opt_ind)
                 return "checked";
             return "";
         };
         const hlRightChecked = (opt_ind) => {
-            if (STORE.correctAnswers[ques_ind] !== -1 &&
+            if (STORE.correctAnswers[ques_ind] && STORE.correctAnswers[ques_ind] !== -1 &&
                 STORE.correctAnswers[ques_ind].indexOf(opt_ind) !== -1)
                 return "teal lighten-4";
             return "";
         };
         const hlRightOpt = (opt_ind) => {
-            if (STORE.correctAnswers[ques_ind] !== -1 &&
+            if (STORE.correctAnswers[ques_ind] && STORE.correctAnswers[ques_ind] !== -1 &&
                 STORE.correctAnswers[ques_ind] === opt_ind)
                 return "teal lighten-4";
             return "";
