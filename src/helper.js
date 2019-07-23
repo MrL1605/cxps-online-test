@@ -51,7 +51,8 @@ const writeSubmit = (submission) => {
 
 const getAllSubmissionsList = (dir) =>
     fs.readdirSync(path.join(__dirname, dir))
-        .filter((f) => fs.statSync(path.join(__dirname, dir, f)).isFile() && f.endsWith(".json"));
+        .filter((f) => fs.statSync(path.join(__dirname, dir, f)).isFile() && f.endsWith(".json"))
+        .map(f => path.basename(path.join(__dirname, dir, f)).trim().split(".")[0].trim());
 
 
 const getSubmission = (dir, name) =>

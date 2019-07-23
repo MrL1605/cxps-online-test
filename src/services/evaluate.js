@@ -5,7 +5,7 @@ const {SUBS_DIRNAME, QUES_DIRNAME, getSubmission, getAllSubmissionsList, getTest
 const validateSession = (req, res) => {
     if ("auth-token" in req["headers"] &&
         req["headers"]["auth-token"] &&
-        atob(req["headers"]["auth-token"]) === "letshirecxps") {
+        atob(req["headers"]["auth-token"]) === "cxpsletshire") {
         return true;
     }
     res.send("Authentication Token incorrect", 401);
@@ -27,7 +27,7 @@ const evaluateSubmission = (req, res) => {
         return;
 
     let submission_name = req.params["submission_name"];
-    let submit = {...getSubmission(SUBS_DIRNAME, submission_name), score: 0, totalScore: 0};
+    let submit = {...getSubmission(SUBS_DIRNAME, submission_name + ".json"), score: 0, totalScore: 0};
     if (!submit["testName"]) {
         console.error("ERROR: No such submission found", submit, submission_name);
         res.send("Could not find any such submission with name [" + submission_name + "]",
@@ -41,11 +41,22 @@ const evaluateSubmission = (req, res) => {
         res.send("ERROR: No such test found.", 404);
     }
     for (let quesInd in questionnaire) {
-        if (questionnaire[quesInd]["type"] && questionnaire[quesInd]["type"] === "text")
-            continue;
-        if (submit["answers"][quesInd] === questionnaire[quesInd]["answer"])
-            submit["score"] += 1;
-        submit["totalScore"] += 1;
+        switch (questionnaire[quesInd]["type"]) {
+            default:
+            case "option":
+                if (submit["answers"][quesInd] === questionnaire[quesInd]["answer"])
+                    submit["score"] += 1;
+                submit["totalScore"] += 1;
+                break;
+            case "multi":
+                if (submit["answers"][quesInd].sort().join(",") ===
+                    questionnaire[quesInd]["answer"].sort().join(","))
+                    submit["score"] += 1;
+                submit["totalScore"] += 1;
+                break;
+            case "text":
+            // Ignore this, can't be verified
+        }
     }
     res.send(submit, 200);
 };

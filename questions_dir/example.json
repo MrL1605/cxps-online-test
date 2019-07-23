@@ -20,7 +20,10 @@
             "Some where"
         ],
         "type": "multi",
-        "answer": 2
+        "answer": [
+            2,
+            3
+        ]
     },
     {
         "question": "Can you do some coding? Let's see.",
