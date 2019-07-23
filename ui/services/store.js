@@ -11,5 +11,6 @@ export var STORE = {
     testName: "",
     submissionName: "",
     privateKey: "",
-    selectedAnswers: []
+    selectedAnswers: [],
+    correctAnswers: []
 };

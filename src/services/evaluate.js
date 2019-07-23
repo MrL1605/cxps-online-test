@@ -27,7 +27,10 @@ const evaluateSubmission = (req, res) => {
         return;
 
     let submission_name = req.params["submission_name"];
-    let submit = {...getSubmission(SUBS_DIRNAME, submission_name + ".json"), score: 0, totalScore: 0};
+    let submit = {
+        ...getSubmission(SUBS_DIRNAME, submission_name + ".json"),
+        score: 0, totalScore: 0, correctAnswers: []
+    };
     if (!submit["testName"]) {
         console.error("ERROR: No such submission found", submit, submission_name);
         res.send("Could not find any such submission with name [" + submission_name + "]",
@@ -41,6 +44,11 @@ const evaluateSubmission = (req, res) => {
         res.send("ERROR: No such test found.", 404);
     }
     for (let quesInd in questionnaire) {
+        if (questionnaire[quesInd]["answer"]) {
+            submit.correctAnswers.push(questionnaire[quesInd]["answer"]);
+        } else {
+            submit.correctAnswers.push(-1);
+        }
         switch (questionnaire[quesInd]["type"]) {
             default:
             case "option":

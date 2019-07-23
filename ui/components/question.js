@@ -13,12 +13,28 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
             else return "";
         };
         const getSelectedCheckedAnswer = (opt_ind) => {
-            if (STORE.selectedAnswers[ques_ind] !== -1)
-                return STORE.selectedAnswers[ques_ind].indexOf(opt_ind) !== -1 ? "checked" : "";
+            if (STORE.selectedAnswers[ques_ind] !== -1 &&
+                STORE.selectedAnswers[ques_ind].indexOf(opt_ind) !== -1)
+                return "checked";
+            return "";
         };
         const getSelectedOptionAnswer = (opt_ind) => {
-            if (STORE.selectedAnswers[ques_ind] !== -1)
-                return STORE.selectedAnswers[ques_ind] === opt_ind ? "checked" : "";
+            if (STORE.selectedAnswers[ques_ind] !== -1 &&
+                STORE.selectedAnswers[ques_ind] === opt_ind)
+                return "checked";
+            return "";
+        };
+        const hlRightChecked = (opt_ind) => {
+            if (STORE.correctAnswers[ques_ind] !== -1 &&
+                STORE.correctAnswers[ques_ind].indexOf(opt_ind) !== -1)
+                return "teal lighten-4";
+            return "";
+        };
+        const hlRightOpt = (opt_ind) => {
+            if (STORE.correctAnswers[ques_ind] !== -1 &&
+                STORE.correctAnswers[ques_ind] === opt_ind)
+                return "teal lighten-4";
+            return "";
         };
 
         switch (ques["type"]) {
@@ -37,7 +53,8 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
                 return wrapAround(ques["options"]
                     .map((o, o_ind) => `
                         <li>
-                            <label class="test-option-checkbox" for="${ques_ind}-${o_ind}-checkbox-option">
+                            <label class="test-option-checkbox ${hlRightChecked(o_ind)}" 
+                                    for="${ques_ind}-${o_ind}-checkbox-option">
                                 <input type="checkbox" class="filled-in" ${getSelectedCheckedAnswer(o_ind)}
                                     id="${ques_ind}-${o_ind}-checkbox-option" name="${ques_ind}-checkbox-option">
                                 <span>${o}</span>
@@ -60,7 +77,7 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
         return wrapAround(ques["options"]
             .map((o, o_ind) => `
                 <li>
-                    <label class="test-option-radio" for="${ques_ind}-${o_ind}-radio-option">
+                    <label class="test-option-radio ${hlRightOpt(o_ind)}" for="${ques_ind}-${o_ind}-radio-option">
                         <input type="radio" ${getSelectedOptionAnswer(o_ind)}
                                 id="${ques_ind}-${o_ind}-radio-option" name="${ques_ind}-radio-option">
                         <span>${o}</span>

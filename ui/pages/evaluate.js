@@ -11,6 +11,7 @@ export const EvaluatePage = (function () {
         document.getElementById("go-back")
             .addEventListener("click", () => {
                 STORE.selectedAnswers = [];
+                STORE.correctAnswers = [];
                 STORE.submissionName = "";
                 STORE.page = PAGES.LIST_SUBMISSIONS;
                 parentClb();
@@ -33,6 +34,7 @@ export const EvaluatePage = (function () {
                 services.getTestQuestions(submission["testName"], (q) => {
                     questions = q;
                     STORE.selectedAnswers = submission.answers;
+                    STORE.correctAnswers = submission.correctAnswers;
                     self.render();
                     registerListeners();
                 }, (e) => errClb(e));
