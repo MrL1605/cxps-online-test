@@ -22,6 +22,8 @@ app
     .get("/api/questions", require("./services/questions").getTests)
     .get("/api/questions/:test_name", require("./services/questions").getTestQuestions)
     .post("/api/submit/:test_name", require("./services/submit").submitTest)
+    .get("/api/submissions", require("./services/evaluate").getSubmissions)
+    .get("/api/eval/:submission_name", require("./services/evaluate").evaluateSubmission)
 ;
 
 

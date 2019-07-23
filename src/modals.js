@@ -31,7 +31,7 @@ module.exports.UIQuestionModal = class UIQuestionModal {
     }
 };
 
-module.exports.SubmitModal = class QuestionModal {
+module.exports.SubmitModal = class SubmitModal {
     constructor() {
         this.candidateName = "";
         this.candidateEmailAdd = "";

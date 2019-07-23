@@ -19,29 +19,28 @@ export const TestPage = (function () {
     const registerListeners = () => {
         document.getElementById("submit-test")
             .addEventListener("click", () => {
+                let submission;
                 try {
-                    let submission = {
+                    submission = {
                         candidateName: getValFromId("first_name") + " " + getValFromId("last_name"),
                         candidateEmailAdd: getValFromId("email"),
                         candidateExp: getValFromId("experience"),
                         testName: STORE.testName,
                         answers: JSON.parse(JSON.stringify(STORE.selectedAnswers)),
                     };
-                    services.submitTestAnswers(submission, () => {
-                        STORE.page = PAGES.TEST_COMPLETE;
-                        STORE.testName = "";
-                        STORE.selectedAnswers = [];
-                        console.log("Completed test");
-                        parentClb();
-                    }, (err) => {
-                        console.error("ERROR Occurred", err);
-                        errorMsg = err + "<br>You might want to refresh the window";
-                        self.render();
-                        registerListeners();
-                    });
-                } catch (e) {
-
+                } catch (ignore) {
                 }
+                services.submitTestAnswers(submission, () => {
+                    STORE.page = PAGES.TEST_COMPLETE;
+                    STORE.testName = "";
+                    STORE.selectedAnswers = [];
+                    parentClb();
+                }, (err) => {
+                    console.error("ERROR Occurred", err);
+                    errorMsg = err + "<br>You might want to refresh the window";
+                    self.render();
+                    registerListeners();
+                });
             });
     };
 
