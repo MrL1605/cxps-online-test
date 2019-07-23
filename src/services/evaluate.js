@@ -1,13 +1,30 @@
+const atob = require("atob");
 const {SUBS_DIRNAME, QUES_DIRNAME, getSubmission, getAllSubmissionsList, getTestQuestionnaire} = require("../helper");
 
 
+const validateSession = (req, res) => {
+    if ("auth-token" in req["headers"] &&
+        req["headers"]["auth-token"] &&
+        atob(req["headers"]["auth-token"]) === "letshirecxps") {
+        return true;
+    }
+    res.send("Authentication Token incorrect", 401);
+    return false;
+};
+
 const getSubmissions = (req, res) => {
+
+    if (!validateSession(req, res))
+        return;
+
     let submissionsList = getAllSubmissionsList(SUBS_DIRNAME);
     res.send(submissionsList, 200);
 };
 
-
 const evaluateSubmission = (req, res) => {
+
+    if (!validateSession(req, res))
+        return;
 
     let submission_name = req.params["submission_name"];
     let submit = {...getSubmission(SUBS_DIRNAME, submission_name), score: 0, totalScore: 0};
