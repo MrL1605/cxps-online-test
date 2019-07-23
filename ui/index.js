@@ -1,7 +1,8 @@
-import {HeaderComponent} from "./components/header.js";
 import {ListTestsPage} from "./pages/list-tests.js";
-import {PAGES, STORE} from "./services/store.js";
 import {TestCompletePage} from "./pages/test-complete.js";
+import {ListSubmissionsPage} from "./pages/list-submissions.js";
+import {HeaderComponent} from "./components/header.js";
+import {PAGES, STORE} from "./services/store.js";
 import {TestPage} from "./pages/test.js";
 import {helper} from "./helper.js";
 
@@ -10,6 +11,12 @@ export const AppModule = (function () {
         render() {
 
             console.log("Rendering Root Page");
+            if (typeof isAdmin !== "undefined" && isAdmin) {
+                STORE.privateKey = btoa(prompt("Enter the private key", ""));
+                STORE.page = PAGES.LIST_SUBMISSIONS;
+                console.log("That would be admin page.");
+            }
+
             const rerender = () => self.render();
 
             // First render a base empty structure
@@ -40,6 +47,12 @@ export const AppModule = (function () {
                     TestCompletePage
                         .init("page-content", rerender);
                     break;
+                case PAGES.LIST_SUBMISSIONS:
+                    ListSubmissionsPage
+                        .init("page-content", rerender);
+                case PAGES.SUBMISSION:
+                    ListSubmissionsPage
+                        .init("page-content", rerender);
             }
 
         }

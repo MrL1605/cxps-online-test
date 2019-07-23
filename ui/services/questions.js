@@ -1,3 +1,5 @@
+import {STORE} from "./store.js";
+
 export const services = (() => {
     let baseURL = "/api";
     return {
@@ -27,6 +29,26 @@ export const services = (() => {
                     body: JSON.stringify(answers)
                 })
                 .then(response => clb(response.text()))
+                .catch((err) => {
+                    console.error("ERROR Occurred:", err);
+                    errClb(err);
+                });
+        },
+        listSubmissions: (clb, errClb) => {
+            fetch(`${baseURL}/submissions`,
+                {method: 'get', headers: {"Auth-Token": STORE.privateKey}})
+                .then(response => response.json())
+                .then(jsonData => clb(jsonData))
+                .catch((err) => {
+                    console.error("ERROR Occurred:", err);
+                    errClb(err);
+                });
+        },
+        evaluate: (name, clb, errClb) => {
+            fetch(`${baseURL}/eval`,
+                {method: 'get', headers: {"Auth-Token": STORE.privateKey}})
+                .then(response => response.json())
+                .then(jsonData => clb(jsonData))
                 .catch((err) => {
                     console.error("ERROR Occurred:", err);
                     errClb(err);
