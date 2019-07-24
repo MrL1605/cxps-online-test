@@ -44,6 +44,7 @@ export const ListTestsPage = (function () {
                 `
                 <div class="tests-card-square card">
                     <div class="card-image">
+                        <img class="tests-card-square-image" src="../assets/images/welcome.jpg" alt="Image for aesthetic purposes">
                         <span class="card-title">${helper.tName(eachTest)}</span>
                     </div>
                     <div class="card-action">

@@ -20,7 +20,11 @@ body, h1, h2, h3, h4, h5, h6, p, span {
     color: #fff;
     height: 176px;
     text-transform: capitalize;
-    background: url('../images/welcome.jpg') center / cover;
+}
+
+.tests-card-square-image {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
 }
 
 .test-complete-card-square.card {
