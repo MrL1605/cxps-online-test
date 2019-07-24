@@ -47,9 +47,13 @@ docker-compose -f compose.yml up -d
    
 
 ## TODO:
- - Make options as code.
+ - Store test in local storage until submitted, to prevent test loss.
+ - Sanitize the code submitted by candidate to make sure that XSS is prevented.
+
+
+Done:
  - Evaluate the answers
  - Create a Page to view evaluation.
- - Store test in local storage until submitted, to prevent test loss.
- - Maybe move from checkbox to collection lists .
+ - (not req) Maybe move from checkbox to collection lists .
+ - Make options as code.
  
