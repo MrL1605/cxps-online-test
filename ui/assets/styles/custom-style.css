@@ -52,6 +52,6 @@ body, h1, h2, h3, h4, h5, h6, p, span {
     display: inline-block;
 }
 
-.question-code-block {
-    margin: 25px 0;
+.question-custom-block {
+    margin: 1.52rem 0 .912rem 0;
 }

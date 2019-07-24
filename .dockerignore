@@ -1,4 +1,6 @@
 
 node_modules
 package-lock.json
-
+submission_dir/
+questions_dir/
+ext-images/

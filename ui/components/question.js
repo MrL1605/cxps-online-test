@@ -138,10 +138,11 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
 
             let codeBlockContent = "", imageContent = "";
             if (ques["code"])
-                codeBlockContent = `<div class="question-code-block"><pre><code class="language-java">${ques["code"].trim()}</code></pre></div>`;
+                codeBlockContent = `<div class="question-custom-block"><pre><code class="language-java">${ques["code"].trim()}</code></pre></div>`;
 
             if (ques["image"])
-                imageContent = `<img src="assets/ext-images/${ques["image"]}" alt="question-related-image"/>`;
+                imageContent = `<img class="question-custom-block col s12"
+                    src="assets/ext-images/${ques["image"]}" alt="question-related-image"/>`;
 
 
             let ele = helper.replaceInnerHTML(id, `
