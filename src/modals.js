@@ -6,6 +6,7 @@ module.exports.QuestionModal = class QuestionModal {
         this.lang = "";
         this.image = "";
         this.options = [];
+        this.optionIsCode = false;
         this.answer = -1;
     }
 };
@@ -13,6 +14,7 @@ module.exports.QuestionModal = class QuestionModal {
 module.exports.UIQuestionModal = class UIQuestionModal {
     constructor() {
         this.question = "";
+        this.optionIsCode = false;
         this.type = "";
         this.code = "";
         this.lang = "";
@@ -27,6 +29,7 @@ module.exports.UIQuestionModal = class UIQuestionModal {
         this.lang = "";
         this.image = ques.image;
         this.options = ques.options;
+        this.optionIsCode = ques.optionIsCode;
         return this;
     }
 };

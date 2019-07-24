@@ -7,6 +7,11 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
     const answerContent = () => {
 
         const wrapAround = (opts) => `<div class="test-question-options"><ul>${opts}</ul></div>`;
+        const optionAsCode = (_opt) => {
+            return ques["optionIsCode"] ?
+                `<pre><code class="language-java">${_opt.trim()}</code></pre>` :
+                `<span>${_opt.trim()}</span>`;
+        };
         const getSelectedTxtAnswer = () => {
             if (STORE.selectedAnswers[ques_ind] && STORE.selectedAnswers[ques_ind] !== -1)
                 return STORE.selectedAnswers[ques_ind];
@@ -57,7 +62,7 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
                                     for="${ques_ind}-${o_ind}-checkbox-option">
                                 <input type="checkbox" class="filled-in" ${getSelectedCheckedAnswer(o_ind)}
                                     id="${ques_ind}-${o_ind}-checkbox-option" name="${ques_ind}-checkbox-option">
-                                <span>${o}</span>
+                                <span>${optionAsCode(o)}</span>
                             </label>                        
                         </li>
                         `)
@@ -80,7 +85,7 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
                     <label class="test-option-radio ${hlRightOpt(o_ind)}" for="${ques_ind}-${o_ind}-radio-option">
                         <input type="radio" ${getSelectedOptionAnswer(o_ind)}
                                 id="${ques_ind}-${o_ind}-radio-option" name="${ques_ind}-radio-option">
-                        <span>${o}</span>
+                        <span>${optionAsCode(o)}</span>
                     </label>
                 </li>
                 `)

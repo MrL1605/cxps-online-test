@@ -10,9 +10,7 @@ export const helper = (function () {
         },
         replaceInnerHTML(_id, _content) {
             let idEle = document.getElementById(_id);
-            // componentHandler.downgradeElements(idEle);
             idEle.innerHTML = _content;
-            // componentHandler.upgradeElement(idEle);
             return idEle;
         },
         updateAnswer(q_ind, answer) {

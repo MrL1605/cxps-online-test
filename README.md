@@ -26,6 +26,7 @@ docker-compose -f compose.yml up -d
    - `option` (single correct with options) **default**
    - `multi` (multiple correct with options)
    - `text` (big text box to enter code or content)
+ - Making `optionIsCode` as true will display options as code instead of text.
    
  - `image` tag only takes name of the file that exists in ext-images **optional**
  - `code` takes the string that needs to be represented as code block on UI. **optional**
