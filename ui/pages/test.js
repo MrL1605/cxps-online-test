@@ -53,8 +53,19 @@ export const TestPage = (function () {
                 questions = ques;
                 // Set a default answer by default
                 STORE.selectedAnswers = [];
-                // TODO: Fix this, not all answers default to -1, need to handle [], ""
-                ques.forEach(() => STORE.selectedAnswers.push(-1));
+                ques.forEach((each_q) => {
+                    switch (each_q["type"]) {
+                        case "text":
+                            STORE.selectedAnswers.push("");
+                            break;
+                        case "multi":
+                            STORE.selectedAnswers.push([]);
+                            break;
+                        default:
+                            STORE.selectedAnswers.push(-1);
+                            break;
+                    }
+                });
                 self.render();
                 registerListeners();
             }, (err) => {
