@@ -26,10 +26,10 @@ export const helper = (function () {
                 _arr.splice(_ind, 1);
         },
         getSubFormattedDate(sub) {
-            return new Date(parseInt(sub.split("-")[1])).toLocaleString();
+            return new Date(parseInt(sub.split("-")[0])).toLocaleString();
         },
         getSubName(sub) {
-            return sub.split("-")[0];
+            return sub.split("-")[1];
         }
     };
 })();

@@ -45,7 +45,7 @@ const getTestQuestionnaire = (dir, name) => {
 
 const writeSubmit = (submission) => {
     let cName = sanitize.sanitize(submission["candidateName"]);
-    let absFile = path.join(__dirname, this.SUBS_DIRNAME, `${cName}-${new Date().getTime()}.json`);
+    let absFile = path.join(__dirname, this.SUBS_DIRNAME, `${new Date().getTime()}-${cName}.json`);
     fs.writeFileSync(absFile, JSON.stringify(submission));
 };
 
