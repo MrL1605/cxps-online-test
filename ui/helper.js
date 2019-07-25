@@ -23,7 +23,7 @@ export const helper = (function () {
         removeIfExists(_arr, _ele) {
             let _ind = _arr.indexOf(_ele);
             if (_ind !== -1)
-                _arr.splice(_ele, 1);
+                _arr.splice(_ind, 1);
         },
         getSubFormattedDate(sub) {
             return new Date(parseInt(sub.split("-")[1])).toLocaleString();

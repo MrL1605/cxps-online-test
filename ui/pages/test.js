@@ -29,6 +29,7 @@ export const TestPage = (function () {
                         answers: JSON.parse(JSON.stringify(STORE.selectedAnswers)),
                     };
                 } catch (ignore) {
+                    return;
                 }
                 services.submitTestAnswers(submission, () => {
                     STORE.page = PAGES.TEST_COMPLETE;
@@ -43,7 +44,6 @@ export const TestPage = (function () {
                 });
             });
     };
-
 
     self = {
         init(_id, clb) {
