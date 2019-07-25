@@ -1,0 +1,272 @@
+[
+    {
+        "question": "Given an  array that represents elements of arithmetic progression in order. It is also given that one element is missing in the progression, the best average case time complexity to find the missing element efficiently is: (It is assumed that enough elements are given to find the missing element)",
+        "options": [
+            "O(n)",
+            "O(logn)",
+            "O(nlogn)",
+            "O(1)"
+        ],
+        "answer": 0
+    },
+    {
+        "question": "Which of the following points are FALSE ? (Multiple choice)",
+        "options": [
+            "Arrays have better cache locality than Linked Lists that can make them better in terms of performance.",
+            "It is easy to insert and delete elements in Linked List than in Arrays. ",
+            "Random access is not preferred in a typical implementation of Linked Lists.",
+            "Arrays inherently takes more space than Linked List for same number of elements",
+            "All of the above"
+        ],
+        "type": "multi",
+        "answer": [
+            3
+        ]
+    },
+    {
+        "question": "Which one of the following statements about abstract classes is FALSE?",
+        "options": [
+            "An abstract class may have a no-argument constructor.",
+            "An abstract class cannot implement an interface.",
+            "An abstract class may implement an interface without defining any of its methods",
+            "You can have member variables in an abstract class.",
+            "An abstract class can not extend another abstract class",
+            "All of the above"
+        ],
+        "type": "multi",
+        "answer": [
+            1,
+            4
+        ]
+    },
+    {
+        "question": "Which keyword ensures a field is coherently accessed by multiple threads?",
+        "options": [
+            "synchronized",
+            "switch",
+            "native",
+            "volatile"
+        ],
+        "answer": 3
+    },
+    {
+        "question": "The default constructor of an enum type is implicitly",
+        "options": [
+            "public",
+            "private",
+            "protected",
+            "package-private"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "A person wants to visit some villages. All villages are connected in a tree structure where the person is currently at the root of all the villages. He starts travelling to a connected village and then wants to keep travelling to new connected villages until there are no more villages left, then backtrack to last visited village and then explore other villages. What algorithm he should use?",
+        "options": [
+            "DFS",
+            "BFS",
+            "Prim's Algorithm",
+            "Kruskal's Algorithm",
+            "None of the Above"
+        ],
+        "answer": 0
+    },
+    {
+        "question": "How many objects does the following create?",
+        "code": "public static void main(String[] args) {\n        String s1=\"String\";\n        String s2=\"String\";\n        String s3=\"String\";\n    }",
+        "lang": "java",
+        "options": [
+            "3",
+            "2",
+            "1",
+            "0"
+        ],
+        "answer": 0
+    },
+    {
+        "question": "What would be the output of following java program?",
+        "code": "public class Answer {\n        public static void main(String[] args) throws Exception {\n            System.out.println(Answer.class.equals(Solution.class));\n            Answer.class.wait();\n        }\n    }\n    class Solution extends Answer {}",
+        "lang": "java",
+        "options": [
+            "false // Waits until interrupted",
+            "false // Exception encountered",
+            "true // Waits until interrupted",
+            "true // Exception encountered"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What would be the output of following java program?",
+        "code": "import java.util.*;\n    public class Solution {\n        public static void main (String[] args) {\n            Object i = new ArrayList().iterator();\n            System.out.print((i instanceof List) + \", \");\n            System.out.print((i instanceof Iterator) + \", \");\n            System.out.print(i instanceof ListIterator);\n        }\n    }",
+        "lang": "java",
+        "options": [
+            "false, true, true",
+            "false, true, false",
+            "true, false, false",
+            "true, false, true"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "When is an object's finalize method called?",
+        "options": [
+            "When no references to the object exist in the application.",
+            "When System.gc() is called.",
+            "Whenever the JVM's garbage collection algorithm decides to call it.",
+            "When the object needs to release any resources it holds",
+            "None of the Above"
+        ],
+        "answer": 2
+    },
+    {
+        "question": "What would be the output of following java program?",
+        "code": "public class Solution {\n        public static int index;\n\n        public static void main(String[] args) {\n            System.out.print(index + \", \");\n            new Solution().m(index);\n            System.out.print(index);\n        }\n\n        public void m(int index) {\n            index++;\n        }\n    }",
+        "lang": "java",
+        "options": [
+            "Prints '0, 0'",
+            "Prints '0, 1'",
+            "Prints '1, 1'",
+            "Compilation Error"
+        ],
+        "answer": 0
+    },
+    {
+        "question": "What would be the output of following java program?",
+        "code": "public class Solution implements Runnable {\n        private static final Object obj = new Object();\n        public static void main(String[] args) throws Exception {\n            Thread th = new Thread(new Solution());\n            th.start();\n            try { Thread.sleep(2000); } catch (Exception e) {}\n            synchronized(obj) {\n                obj.notify();\n            }\n        }\n\n        public void run() {\n            synchronized(obj) {\n                System.out.println(\"first\");\n                try{ obj.wait(); }\n                catch (Exception e) { e.printStackTrace(System.err); }\n                System.out.println(\"second\");\n            }\n        }\n    }",
+        "lang": "java",
+        "options": [
+            "Prints “first”, followed by an Exception",
+            "Prints “first”, then “second” and exits quickly",
+            "Compilation Error",
+            "Prints “first”, waits for 2 seconds and then prints “second” and exits."
+        ],
+        "answer": 3
+    },
+    {
+        "question": "What would be the output of following java program?",
+        "code": "class Solution {\n        public static void main(String[] args) {\n            int sum = 0;\n            for (int i = 0, j = 0; i < 5 & j < 5; ++i, j = i + 1)\n                sum += i;\n            System.out.println(sum);\n        }\n    }",
+        "lang": "java",
+        "options": [
+            "Compilation Error",
+            "5",
+            "6",
+            "10"
+        ],
+        "answer": 2
+    },
+    {
+        "question": "Which of the following statements is / are true? (Multiple Choice)",
+        "options": [
+            "\"X extends Y\" is correct if X is a class and Y is an interface.",
+            "\"X extends Y\" is correct if X is an interface and Y is a class.",
+            "\"X extends Y\" is correct if X and Y are either both classes or both interface.",
+            "\"X extends Y\" is correct for all combinations of X and Y being classes and/or interfaces.",
+            "None of the Above"
+        ],
+        "type": "multi",
+        "answer": [
+            2
+        ]
+    },
+    {
+        "question": "Which of the following cannot be achieved in a database?",
+        "options": [
+            "Exception handling in SQL",
+            "Fragment a database table into different partitions.",
+            "Rollback a database transaction",
+            "None of the Above"
+        ],
+        "answer": 3
+    },
+    {
+        "question": "Which of the following is a characteristic of a primary key?",
+        "options": [
+            "There can only be one column designated for primary key",
+            "Primary keys cannot have null values when created with the table.",
+            "Primary keys have to be explicitly indexed",
+            "A table with primary key needs to be a foreign key in another table"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "Which of the following is true with respect to foreign keys?",
+        "options": [
+            "Foreign key value cannot be null",
+            "Foreign keys need to be unique",
+            "Multiple foreign keys cannot be created from a single primary key.",
+            "Creation of multi-column foreign key is possible."
+        ],
+        "answer": 3
+    },
+    {
+        "question": "Given a table ARCHIVES, there is a need to store large PDF documents in the database. Which of the following should be the datatype of the column?",
+        "options": [
+            "BLOB",
+            "CLOB",
+            "VARCHAR",
+            "VARBINARY"
+        ],
+        "answer": 0
+    },
+    {
+        "question": "Consider the table EMPLOYEE structured with the columns employee_id, employee_name, age, salary and department_id. Write a query to display the count of employees whose age < 30",
+        "type": "text"
+    },
+    {
+        "question": "Consider the table EMPLOYEE structured with the columns employee_id, employee_name, age, salary and department_id. Write a query to display the count of employees whose age < 30 segregating the result statistically for every department.",
+        "type": "text"
+    },
+    {
+        "question": "Consider the table EMPLOYEE structured with the columns employee_id, employee_name, age, salary and department_id. Write a query to retrieve the employee name(s) who has / have the third highest salary",
+        "type": "text"
+    },
+    {
+        "question": "Consider the table EMPLOYEE structured with the columns employee_id, employee_name, age, status, salary and department_id. \"status\" accepts the values \"JOINED\", \"PROBATION\", \"ACCEPTED\" and \"NOTICE_PERIOD\". Write a query to group employees by status whose name starts with 'S'",
+        "type": "text"
+    },
+    {
+        "question": "Consider the table EMPLOYEE structured with the columns employee_id, employee_name, age, salary and department_id. Write a query to display the employees total salary of each department's employees whose age is less than 30 along with the department Id but only of those departments who have no more than 10 employees in the respective departments",
+        "type": "text"
+    },
+    {
+        "question": "Write a query to select alternate rows (odd numbered) from table MY_TABLE (Assume, \"sl_no\" is the column of the table which contains the sequential serial number of any row)",
+        "type": "text"
+    },
+    {
+        "question": "What is / are the difference(s) between wait and sleep methods in Java?",
+        "type": "text"
+    },
+    {
+        "question": "Manually invoked the garbage collector at the end of a method using \"System.gc();\" followed by which the method variables earlier declared and initialized are used again. What happens to the variables?",
+        "options": [
+            "Variales can be accessed but are nullified",
+            "Variables can be accessed but are set back to their initialized values",
+            "Variables cannot be accessed due to Compilation error",
+            "Variables cannot be accessed due to Runtime error",
+            "Variables can be accessed and their values are retained without any modification"
+        ],
+        "answer": 4
+    },
+    {
+        "question": "How are JAVA objects stored in memory?",
+        "options": [
+            "Stack",
+            "Heap",
+            "Queue",
+            "List",
+            "None of the above"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "Difference between static and final keywords in Java?",
+        "type": "text"
+    },
+    {
+        "question": "What happens if a database connection is not rolled back when an exception occurs?",
+        "type": "text"
+    },
+    {
+        "question": "What is the difference between ClassNotFoundException and NoClassDefFoundException?",
+        "type": "text"
+    }
+]

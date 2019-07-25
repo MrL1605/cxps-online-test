@@ -44,7 +44,7 @@ const evaluateSubmission = (req, res) => {
         res.send("ERROR: No such test found.", 404);
     }
     for (let quesInd in questionnaire) {
-        if (questionnaire[quesInd]["answer"]) {
+        if (questionnaire[quesInd]["answer"] || questionnaire[quesInd]["answer"] === 0) {
             submit.correctAnswers.push(questionnaire[quesInd]["answer"]);
         } else {
             submit.correctAnswers.push(-1);

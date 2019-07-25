@@ -24,7 +24,8 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
             return "";
         };
         const getSelectedOptionAnswer = (opt_ind) => {
-            if (STORE.selectedAnswers[ques_ind] && STORE.selectedAnswers[ques_ind] !== -1 &&
+            if ((STORE.selectedAnswers[ques_ind] || STORE.selectedAnswers[ques_ind] === 0) &&
+                STORE.selectedAnswers[ques_ind] !== -1 &&
                 STORE.selectedAnswers[ques_ind] === opt_ind)
                 return "checked";
             return "";
@@ -36,7 +37,8 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
             return "";
         };
         const hlRightOpt = (opt_ind) => {
-            if (STORE.correctAnswers[ques_ind] && STORE.correctAnswers[ques_ind] !== -1 &&
+            if ((STORE.correctAnswers[ques_ind] || STORE.correctAnswers[ques_ind] === 0) &&
+                STORE.correctAnswers[ques_ind] !== -1 &&
                 STORE.correctAnswers[ques_ind] === opt_ind)
                 return "teal lighten-4";
             return "";

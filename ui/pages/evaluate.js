@@ -8,14 +8,17 @@ export const EvaluatePage = (function () {
     let id, parentClb, name = "", questions = [], submission = {}, errorMsg, self = {};
 
     const registerListeners = () => {
+        let goBackListener = () => {
+            STORE.selectedAnswers = [];
+            STORE.correctAnswers = [];
+            STORE.submissionName = "";
+            STORE.page = PAGES.LIST_SUBMISSIONS;
+            parentClb();
+        };
         document.getElementById("go-back")
-            .addEventListener("click", () => {
-                STORE.selectedAnswers = [];
-                STORE.correctAnswers = [];
-                STORE.submissionName = "";
-                STORE.page = PAGES.LIST_SUBMISSIONS;
-                parentClb();
-            });
+            .addEventListener("click", goBackListener);
+        document.getElementById("go-back-top")
+            .addEventListener("click", goBackListener);
     };
 
     const errClb = (err) => {
@@ -74,6 +77,11 @@ export const EvaluatePage = (function () {
                                 <td>${submission.score} / ${submission.totalScore}</td>
                             </tr>
                         </table>
+                    </div>
+                </div>
+                <div style="margin: 30px 0">
+                    <div class="btn btn-large waves-effect waves-light" id="go-back-top">
+                        Go Back
                     </div>
                 </div>
                 
