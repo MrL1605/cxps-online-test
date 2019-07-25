@@ -37,7 +37,7 @@ export const ListSubmissionsPage = (function () {
             if (!id)
                 return;
 
-            let subContent = submissions.map((eachSub) => `
+            let subContent = submissions.reverse().map((eachSub) => `
                 <tr id="${eachSub}">
                     <td>${helper.getSubName(eachSub)}</td>
                     <td>${helper.getSubFormattedDate(eachSub)}</td>
