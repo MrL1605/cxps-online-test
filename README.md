@@ -50,7 +50,7 @@ docker-compose -f compose.yml up -d
  - Store test in local storage until submitted, to prevent test loss.
  - Sanitize the code submitted by candidate to make sure that XSS is prevented.
  - Fix the error modal
- - Sort submissions based on date instead of name
+ - Add pagination in list submissions page
 
 Done:
  - Evaluate the answers
@@ -58,4 +58,5 @@ Done:
  - (not req) Maybe move from checkbox to collection lists .
  - Make options as code.
  - Fix errors related to submission of wrong answers.
+ - Sort submissions based on date instead of name
  
