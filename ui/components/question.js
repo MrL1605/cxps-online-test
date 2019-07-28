@@ -126,8 +126,12 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
                 // No need to update currentAnswer
                 currentAnswer = "";
                 let txtEle = document.getElementById(`${ques_ind}-text-area`);
-                txtEle.addEventListener("focus", () => helper.updateAnswer(ques_ind, txtEle.value));
-                txtEle.addEventListener("blur", () => helper.updateAnswer(ques_ind, txtEle.value));
+                txtEle.addEventListener("focus", () =>
+                    helper.updateAnswer(ques_ind,
+                        txtEle.value.replace(/</g, "&lt").replace(/>/g, "&gt")));
+                txtEle.addEventListener("blur",
+                    () => helper.updateAnswer(ques_ind,
+                        txtEle.value.replace(/</g, "&lt").replace(/>/g, "&gt")));
                 break;
         }
     };
