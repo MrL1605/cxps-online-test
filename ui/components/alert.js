@@ -5,9 +5,6 @@ export const ErrorAlertComponent = (function () {
     let id, content, dialog, parentClb, self;
 
     const registerListeners = () => {
-        if (!dialog.showModal) {
-            dialogPolyfill.registerDialog(dialog);
-        }
         document
             .getElementById(id + "-dialog-close-btn")
             .addEventListener("click", () => self.close());
@@ -19,12 +16,12 @@ export const ErrorAlertComponent = (function () {
             content = _content;
             parentClb = clb;
             this.render();
-            dialog = document.getElementById(id + "-dialog");
+            dialog = M.Modal.init(document.getElementById(id + "-dialog"));
             registerListeners();
             return self;
         },
         show() {
-            dialog.showModal();
+            dialog.open();
         },
         close() {
             dialog.close();
@@ -32,15 +29,18 @@ export const ErrorAlertComponent = (function () {
         },
         render: () => {
             helper.replaceInnerHTML(id, `
-                <dialog class="mdl-dialog" id="${id}-dialog">
-                    <h3 class="mdl-dialog__title">Error Occurred</h3>
-                    <div class="mdl-dialog__content">
+                <div class="modal" id="${id}-dialog">
+                    <div class="modal-content">
+                        <h4>Error Occurred</h4>
                         <p>${content}</p>
                     </div>
-                    <div class="mdl-dialog__actions">
-                        <button class="mdl-button" id="${id}-dialog-close-btn" type="button">Close</button>
+                    <div class="modal-footer">
+                        <button class="modal-close waves-effect waves-green btn-flat"
+                                id="${id}-dialog-close-btn">
+                            Dismiss
+                        </button>
                     </div>
-                </dialog>
+                </div>
                 `);
         }
     };
