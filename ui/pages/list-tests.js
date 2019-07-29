@@ -17,6 +17,7 @@ export const ListTestsPage = (function () {
                 .addEventListener("click", () => {
                     helper.setPage(PAGES.TEST);
                     helper.setTestName(eachTest);
+                    helper.setSelectedAnswers([]);
                     parentClb();
                 });
         });

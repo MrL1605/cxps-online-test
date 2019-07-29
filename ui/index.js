@@ -12,6 +12,7 @@ export const AppModule = (function () {
         render() {
 
             console.log("Rendering Root Page");
+            helper.restoreFromLocalStorage();
             if (typeof isAdmin !== "undefined" && isAdmin) {
                 if (!STORE.privateKey) {
                     STORE.privateKey = btoa(prompt("Enter the private key", ""));

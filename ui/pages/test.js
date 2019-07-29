@@ -66,7 +66,8 @@ export const TestPage = (function () {
                             break;
                     }
                 }
-                helper.setSelectedAnswers(selectedAns);
+                if (STORE.selectedAnswers.length === 0)
+                    helper.setSelectedAnswers(selectedAns);
                 self.render();
                 registerListeners();
             }, (err) => {
