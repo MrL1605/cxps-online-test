@@ -59,3 +59,8 @@ body, h1, h2, h3, h4, h5, h6, p, span {
 .question-custom-block {
     margin: 1.52rem 0 .912rem 0;
 }
+
+.CodeMirror {
+    border: 1px solid #000;
+    height: 400px;
+}
