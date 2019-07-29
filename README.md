@@ -25,7 +25,8 @@ docker-compose -f compose.yml up -d
  - Supported types of questions:
    - `option` (single correct with options) **default**
    - `multi` (multiple correct with options)
-   - `text` (big text box to enter code or content)
+   - `code` (big text box to enter code)
+   - `text` (big text box to enter content)
  - Making `optionIsCode` as true will display options as code instead of text.
    
  - `image` tag only takes name of the file that exists in ext-images **optional**

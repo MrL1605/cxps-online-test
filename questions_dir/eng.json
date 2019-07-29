@@ -213,7 +213,7 @@
     },
     {
         "question": "Consider the table EMPLOYEE structured with the columns employee_id, employee_name, age, salary and department_id. Write a query to display the count of employees whose age < 30 segregating the result statistically for every department.",
-        "type": "text"
+        "type": "code"
     },
     {
         "question": "Consider the table EMPLOYEE structured with the columns employee_id, employee_name, age, salary and department_id. Write a query to retrieve the employee name(s) who has / have the third highest salary",

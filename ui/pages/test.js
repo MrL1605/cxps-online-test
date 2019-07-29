@@ -93,10 +93,6 @@ export const TestPage = (function () {
                         Please select answers for following questions, and click on submit in the end of the page 
                         when done with all the questions. 
                     </p>
-                    <p>
-                        The test is not timed but it should be completed within 1hr 30min. 
-                        You can ask for extra time if you need it to complete the test.
-                    </p>
                     
                     <div class="row">
                         <form class="col s12">

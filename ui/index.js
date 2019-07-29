@@ -29,10 +29,10 @@ export const AppModule = (function () {
                     ${HeaderComponent.render()}
                     <div class="container">
                         <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s8" id="page-content">
+                            <div class="col s1"></div>
+                            <div class="col s10" id="page-content">
                             </div>
-                            <div class="col s2"></div>
+                            <div class="col s1"></div>
                         </div>
                     </div>
                 </div>`);

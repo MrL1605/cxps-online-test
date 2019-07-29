@@ -71,6 +71,14 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
                     .join("\n"));
             case "text":
                 return `
+                    <div class="input-field col s12">
+                        <textarea id="${ques_ind}-text-area" 
+                            class="materialize-textarea">${getSelectedTxtAnswer()}</textarea>
+                        <label for="${ques_ind}-text-area">Solution</label>
+                    </div>
+                `;
+            case "code":
+                return `
                     <div class="col s12">
                         <textarea id="${ques_ind}-text-area">${getSelectedTxtAnswer()}</textarea>
                     </div>
@@ -156,7 +164,7 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
 
             let ele = helper.replaceInnerHTML(id, `
                 <div class="col s12">
-                    <h4>${ques_ind + 1}: ${ques["question"]}</h4>
+                    <h5>${ques_ind + 1}: ${ques["question"]}</h5>
                     ${codeBlockContent}
                     ${imageContent}
                     ${answerContent(ques, ques_ind)}                
@@ -166,7 +174,7 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
             /* Enable Plugins */
             Prism.highlightAllUnder(ele, false);
             M.updateTextFields();
-            if (ques["type"] === "text")
+            if (ques["type"] === "code")
                 CodeMirror.fromTextArea(document.getElementById(`${ques_ind}-text-area`), {
                     lineNumbers: true,
                     styleActiveLine: true,
