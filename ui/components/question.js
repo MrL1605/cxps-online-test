@@ -71,10 +71,8 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
                     .join("\n"));
             case "text":
                 return `
-                    <div class="input-field col s12">
-                        <textarea id="${ques_ind}-text-area" 
-                            class="materialize-textarea">${getSelectedTxtAnswer()}</textarea>
-                        <label for="${ques_ind}-text-area">Solution</label>
+                    <div class="col s12">
+                        <textarea id="${ques_ind}-text-area">${getSelectedTxtAnswer()}</textarea>
                     </div>
                 `;
             default:
@@ -165,8 +163,18 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
                 </div>
             `);
 
+            /* Enable Plugins */
             Prism.highlightAllUnder(ele, false);
             M.updateTextFields();
+            if (ques["type"] === "text")
+                CodeMirror.fromTextArea(document.getElementById(`${ques_ind}-text-area`), {
+                    lineNumbers: true,
+                    styleActiveLine: true,
+                    matchBrackets: true,
+                    theme: "darcula",
+                    extraKeys: {"Ctrl-Space": "autocomplete"},
+                    mode: "javascript"
+                });
         }
     };
     return self.init(_id, _ques, _ind);
