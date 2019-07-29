@@ -8,7 +8,7 @@ export const TestCompletePage = (function () {
         document
             .getElementById(`${id}-go-back-btn`)
             .addEventListener("click", () => {
-                STORE.page = PAGES.LIST_TESTS;
+                helper.setPage(PAGES.LIST_TESTS);
                 parentClb("");
             });
     };

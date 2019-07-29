@@ -30,6 +30,18 @@ export const helper = (function () {
         },
         getSubName(sub) {
             return sub.split("-")[1];
+        },
+        setTestName: (_name) => {
+            STORE.testName = _name;
+        },
+        setPage: (_page) => {
+            STORE.page = _page;
+        },
+        setSelectedAnswers: (_arr) => {
+            STORE.selectedAnswers = _arr;
+        },
+        setCorrectAnswers: (_arr) => {
+            STORE.correctAnswers = _arr;
         }
     };
 })();

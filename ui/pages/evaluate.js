@@ -9,10 +9,10 @@ export const EvaluatePage = (function () {
 
     const registerListeners = () => {
         let goBackListener = () => {
-            STORE.selectedAnswers = [];
-            STORE.correctAnswers = [];
+            helper.setCorrectAnswers([]);
+            helper.setSelectedAnswers([]);
+            helper.setPage(PAGES.LIST_SUBMISSIONS);
             STORE.submissionName = "";
-            STORE.page = PAGES.LIST_SUBMISSIONS;
             parentClb();
         };
         document.getElementById("go-back")
@@ -36,8 +36,8 @@ export const EvaluatePage = (function () {
                 submission = _submission;
                 services.getTestQuestions(submission["testName"], (q) => {
                     questions = q;
-                    STORE.selectedAnswers = submission.answers;
-                    STORE.correctAnswers = submission.correctAnswers;
+                    helper.setSelectedAnswers(submission.answers);
+                    helper.setCorrectAnswers(submission.correctAnswers);
                     self.render();
                     registerListeners();
                 }, (e) => errClb(e));

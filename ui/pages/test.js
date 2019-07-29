@@ -32,9 +32,9 @@ export const TestPage = (function () {
                     return;
                 }
                 services.submitTestAnswers(submission, () => {
-                    STORE.page = PAGES.TEST_COMPLETE;
-                    STORE.testName = "";
-                    STORE.selectedAnswers = [];
+                    helper.setPage(PAGES.TEST_COMPLETE);
+                    helper.setTestName("");
+                    helper.setSelectedAnswers([]);
                     parentClb();
                 }, (err) => {
                     console.error("ERROR Occurred", err);
@@ -52,20 +52,21 @@ export const TestPage = (function () {
             services.getTestQuestions(STORE.testName, (ques) => {
                 questions = ques;
                 // Set a default answer by default
-                STORE.selectedAnswers = [];
-                ques.forEach((each_q) => {
+                let selectedAns = [];
+                for (let each_q of ques) {
                     switch (each_q["type"]) {
                         case "text":
-                            STORE.selectedAnswers.push("");
+                            selectedAns.push("");
                             break;
                         case "multi":
-                            STORE.selectedAnswers.push([]);
+                            selectedAns.push([]);
                             break;
                         default:
-                            STORE.selectedAnswers.push(-1);
+                            selectedAns.push(-1);
                             break;
                     }
-                });
+                }
+                helper.setSelectedAnswers(selectedAns);
                 self.render();
                 registerListeners();
             }, (err) => {

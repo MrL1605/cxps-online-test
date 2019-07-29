@@ -12,7 +12,7 @@ export const ListSubmissionsPage = (function () {
             document
                 .getElementById(eachSub)
                 .addEventListener("click", () => {
-                    STORE.page = PAGES.SUBMISSION;
+                    helper.setPage(PAGES.SUBMISSION);
                     STORE.submissionName = eachSub;
                     parentClb();
                 });

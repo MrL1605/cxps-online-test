@@ -15,7 +15,7 @@ export const AppModule = (function () {
             if (typeof isAdmin !== "undefined" && isAdmin) {
                 if (!STORE.privateKey) {
                     STORE.privateKey = btoa(prompt("Enter the private key", ""));
-                    STORE.page = PAGES.LIST_SUBMISSIONS;
+                    helper.setPage(PAGES.LIST_SUBMISSIONS);
                     console.log("That would be admin page.");
                 }
             }

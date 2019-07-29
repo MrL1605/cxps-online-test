@@ -15,8 +15,8 @@ export const ListTestsPage = (function () {
             document
                 .getElementById(`${id}-${eachTest}-start-test`)
                 .addEventListener("click", () => {
-                    STORE.page = PAGES.TEST;
-                    STORE.testName = eachTest;
+                    helper.setPage(PAGES.TEST);
+                    helper.setTestName(eachTest);
                     parentClb();
                 });
         });
