@@ -48,6 +48,7 @@ docker-compose -f compose.yml up -d
 
 ## TODO:
  - Add pagination in list submissions page
+ - Replace with textarea with CodeMirror for code submission.
 
 Done:
  - Evaluate the answers
