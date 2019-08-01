@@ -2,7 +2,7 @@ import {helper} from "../helper.js";
 import {STORE} from "../services/store.js";
 
 export const QuestionComponent = (function (_id, _ques, _ind) {
-    let id, ques, ques_ind, currentAnswer, self;
+    let id, ques, ques_ind, currentAnswer, self, editor;
 
     const answerContent = () => {
 
@@ -80,7 +80,7 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
             case "code":
                 return `
                     <div class="col s12">
-                        <textarea id="${ques_ind}-text-area">${getSelectedTxtAnswer()}</textarea>
+                        <textarea id="${ques_ind}-text-area"></textarea>
                     </div>
                 `;
             default:
@@ -134,11 +134,20 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
                 let txtEle = document.getElementById(`${ques_ind}-text-area`);
                 txtEle.addEventListener("focus", () =>
                     helper.updateAnswer(ques_ind,
-                        txtEle.value.replace(/</g, "&lt").replace(/>/g, "&gt")));
+                        txtEle.value.replace(/</g, "&lt")
+                            .replace(/>/g, "&gt")));
                 txtEle.addEventListener("blur",
                     () => helper.updateAnswer(ques_ind,
-                        txtEle.value.replace(/</g, "&lt").replace(/>/g, "&gt")));
+                        txtEle.value.replace(/</g, "&lt")
+                            .replace(/>/g, "&gt")));
                 break;
+            case "code":
+                editor.on("change", () => {
+                    let ans = editor.getValue();
+                    helper.updateAnswer(ques_ind,
+                        ans.replace(/</g, "&lt")
+                            .replace(/>/g, "&gt"));
+                });
         }
     };
 
@@ -174,15 +183,20 @@ export const QuestionComponent = (function (_id, _ques, _ind) {
             /* Enable Plugins */
             Prism.highlightAllUnder(ele, false);
             M.updateTextFields();
-            if (ques["type"] === "code")
-                CodeMirror.fromTextArea(document.getElementById(`${ques_ind}-text-area`), {
-                    lineNumbers: true,
-                    styleActiveLine: true,
-                    matchBrackets: true,
-                    theme: "darcula",
-                    extraKeys: {"Ctrl-Space": "autocomplete"},
-                    mode: "javascript"
-                });
+            if (ques["type"] === "code") {
+                editor = CodeMirror.fromTextArea(document.getElementById(`${ques_ind}-text-area`),
+                    {
+                        lineNumbers: true,
+                        styleActiveLine: true,
+                        matchBrackets: true,
+                        theme: "darcula",
+                        extraKeys: {"Ctrl-Space": "autocomplete"},
+                        mode: "javascript"
+                    });
+                if (STORE.selectedAnswers[ques_ind] && STORE.selectedAnswers[ques_ind] !== -1)
+                    editor.setValue(STORE.selectedAnswers[ques_ind]);
+            }
+
         }
     };
     return self.init(_id, _ques, _ind);

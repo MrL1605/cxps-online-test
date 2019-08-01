@@ -13,12 +13,15 @@ export const AppModule = (function () {
 
             console.log("Rendering Root Page");
             helper.restoreFromLocalStorage();
-            if (typeof isAdmin !== "undefined" && isAdmin) {
-                if (!STORE.privateKey) {
-                    STORE.privateKey = btoa(prompt("Enter the private key", ""));
-                    helper.setPage(PAGES.LIST_SUBMISSIONS);
-                    console.log("That would be admin page.");
-                }
+            if (typeof isAdmin !== "undefined" && isAdmin && !STORE.privateKey) {
+                // Is opening admin page
+                STORE.privateKey = btoa(prompt("Enter the private key", ""));
+                helper.setPage(PAGES.LIST_SUBMISSIONS);
+                console.log("That would be admin page.");
+            } else if (!STORE.privateKey) {
+                // Is opening index page
+                if (STORE.page === PAGES.LIST_SUBMISSIONS || STORE.page === PAGES.SUBMISSION)
+                    helper.setPage(PAGES.LIST_TESTS);
             }
 
             const rerender = () => self.render();

@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   cxps-online-test:
-    image: "redit/cxps-online-test:2.6.4"
+    image: "redit/cxps-online-test:2.6.5"
     ports:
       - 4343:3000
     volumes:
